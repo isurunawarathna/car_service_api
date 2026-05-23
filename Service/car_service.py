@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from Models.car_models import CarResponse, CarCreate
 from Repository.car_repository import InMemoryRepository
+from typing import List
 
 @dataclass
 class CarService:
@@ -12,3 +13,6 @@ class CarService:
 
     def get_by_id(self, car_id : int) -> CarResponse:
         return self.car_repo.get_by_id(car_id)
+
+    def get_all(self)->List[CarResponse]:
+        return self.car_repo.get_all()
