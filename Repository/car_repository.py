@@ -1,6 +1,7 @@
 from datetime import datetime
 from Models.car_models import CarResponse, CarCreate
-from typing import Dict, Optional
+from typing import Dict, Optional, List
+
 
 class CarServiceError(Exception):
     pass
@@ -21,7 +22,7 @@ class InMemoryRepository:
             car_type=car.car_type,
             fuel_type=car.fuel_type,
             rate_per_km=car.rate_per_km,
-            milage=car.milage,
+            mileage=car.mileage,
             license_plate=car.license_plate,
             created_at= datetime.now().isoformat(),
             updated_at= datetime.now().isoformat()
@@ -33,6 +34,14 @@ class InMemoryRepository:
 
     def get_by_id(self, car_id : int) -> Optional[CarResponse]:
         return self.__cars.get(car_id)
+
+    def get_all(self)->List[CarResponse]:
+        all_cars : List[CarResponse] = []
+
+        for car in self.__cars.values():
+            all_cars.append(car)
+
+        return all_cars
 
 
 
